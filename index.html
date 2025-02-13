@@ -8,19 +8,37 @@
         body {
             margin: 0;
             font-family: sans-serif;
-            background-color: #1a202c; /* Dark blue-gray background (from image) */
-            color: #e2e8f0; /* Light gray text color (from image) */
+            background-color: #1a202c;
+            color: #e2e8f0;
         }
 
         .header {
             width: 100%;
-            padding: 20px; /* Add some padding */
-            background-color: #2d3748; /* Slightly lighter header background */
+            padding: 20px;
+            background-color: #2d3748;
+            display: flex; /* Use flexbox for layout */
+            align-items: center; /* Vertically center content */
+        }
+
+        .logo {
+            max-height: 50px; /* Limit logo height */
+            margin-right: 20px; /* Space between logo and nav */
         }
 
         .nav {
-            display: flex; /* Use flexbox for horizontal menu */
-            justify-content: center; /* Center the menu items */
+            flex: 1; /* Allow nav to take available space */
+            text-align: left; /* Align menu to the left */
+        }
+
+        .menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex; /* Horizontal menu */
+        }
+
+        .menu li {
+            position: relative; /* For dropdown positioning */
         }
 
         .menu-button {
@@ -30,31 +48,31 @@
             font-size: 1.2em;
             cursor: pointer;
             padding: 10px;
-            margin: 0 10px; /* Add space between menu items */
         }
 
         .dropdown {
             display: none;
             position: absolute;
-            background-color: rgba(45, 55, 72, 0.9); /* Semi-transparent header background */
+            background-color: rgba(45, 55, 72, 0.9);
             list-style: none;
             padding: 0;
             margin: 0;
             z-index: 1;
+            min-width: 160px; /* Minimum width for dropdown */
         }
 
         .dropdown li {
-            padding: 10px;
+            padding: 0; /* Remove padding from list items */
         }
 
         .dropdown a {
             color: #e2e8f0;
             text-decoration: none;
             display: block;
-            padding: 5px 10px; /* Add padding to links */
+            padding: 10px; /* Add padding to links */
         }
         .dropdown a:hover{
-          color: lightgray;
+            color: lightgray;
         }
 
         /* Submenu styles */
@@ -68,65 +86,80 @@
             padding: 0;
             margin: 0;
         }
-        .dropdown li:hover .submenu {
-          display: block;
-        }
-        .submenu li {
-          white-space: nowrap;
-        }
 
-        /* Show the dropdown on hover */
-        .nav > ul > li:hover .dropdown { /* Target direct children of .nav > ul */
+        .menu li:hover .dropdown, /* Show dropdown on hover */
+        .dropdown li:hover .submenu { /* Show submenu on hover */
             display: block;
         }
-        .content{
-          padding: 20px;
-          text-align: center; /* Center content */
-        }
-        .logo {
-          max-width: 300px; /* Limit logo width */
-          margin: 0 auto; /* Center logo horizontally */
-          display: block; /* Make the logo a block element */
+        .submenu li {
+            white-space: nowrap;
         }
 
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Responsive adjustments (example) */
+        @media (max-width: 768px) {
+            .menu {
+                flex-direction: column; /* Vertical menu on smaller screens */
+            }
+            .menu-button {
+                display: block; /* Make buttons stack vertically */
+                width: 100%;
+                text-align: left; /* Align text to the left */
+            }
+            .dropdown {
+                position: static; /* Prevent dropdown from overflowing */
+            }
+            .submenu {
+                position: static;
+                left: 0;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <div class="nav">
-            <ul>  <li><button class="menu-button">Home</button></li>  <li><button class="menu-button">About</button></li>
-                <li><button class="menu-button">Contact</button></li>
-                <li><button class="menu-button">Social</button></li>
-                <li>
-                    <button class="menu-button">QRADOS</button>
-                    <ul class="dropdown">
-                        <li><a href="#">Framework</a></li>
-                        <li><a href="#">Get Involved</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <button class="menu-button">QRH</button>
-                    <ul class="dropdown">
-                        <li><a href="#">Platform</a></li>
-                        <li><a href="#">Get Involved</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <button class="menu-button">Portal</button>
-                    <ul class="dropdown">
-                        <li><a href="#">Get Support</a></li>
-                        <li><a href="#">Sign Up</a></li>
-                        <li><a href="#">Sign In</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="content">
-        <img class="logo" src="path/to/your/logo.png" alt="Beyond The Horizon Labs Logo">  <h1>Welcome to Beyond The Horizon Labs</h1>
-        <p>This is the main content area.  Add your website text, images, etc. here.</p>
-    </div>
+<div class="header">
+    <img class="logo" src="images/logo-1.png" alt="Beyond The Horizon Labs Logo">
+    <nav class="nav">
+        <ul class="menu">
+            <li><button class="menu-button">Home</button></li>
+            <li><button class="menu-button">About</button></li>
+            <li><button class="menu-button">Contact</button></li>
+            <li><button class="menu-button">Social</button></li>
+            <li>
+                <button class="menu-button">QRADOS</button>
+                <ul class="dropdown">
+                    <li><a href="#">Framework</a></li>
+                    <li><a href="#">Get Involved</a></li>
+                </ul>
+            </li>
+            <li>
+                <button class="menu-button">QRH</button>
+                <ul class="dropdown">
+                    <li><a href="#">Platform</a></li>
+                    <li><a href="#">Get Involved</a></li>
+                </ul>
+            </li>
+            <li>
+                <button class="menu-button">Portal</button>
+                <ul class="dropdown">
+                    <li><a href="#">Get Support</a></li>
+                    <li><a href="#">Sign Up</a></li>
+                    <li><a href="#">Sign In</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<div class="content">
+    <h1>Welcome to Beyond The Horizon Labs</h1>
+    <p>🔬 Pioneering the Future of Quantum Healing, AI-Driven Regenerative Medicine, and Consciousness Exploration</p>
+</div>
 
 </body>
 </html>
